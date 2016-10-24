@@ -1,16 +1,27 @@
 //your variable declarations here
-  SpaceShip bob;
+SpaceShip bob;
+Star [] spaceStars = new Star[250];
 public void setup() 
 {
   //your code here
-  size(500, 500);
+  size(800, 800);
   bob = new SpaceShip();
+  for (int i = 0; i < spaceStars.length; i ++)
+  {
+    spaceStars[i] = new Star();
+  }
 }
+
 public void draw() 
 {
   //your code here
   background(0);
   bob.show();
+  bob.move();
+  for (int i = 0; i < spaceStars.length; i ++)
+  {
+    spaceStars[i].show();
+  }
 }
 
 public void keyPressed()
@@ -18,6 +29,32 @@ public void keyPressed()
   if (key == 'a')
   {
     bob.rotate(-10);
+  }
+
+  if (key == 'd')
+  {
+    bob.rotate(10);
+  }
+
+  if (key == 'w')
+  {
+    bob.accelerate(0.5);
+  }
+
+  if(key == 'h')
+  {
+    bob.setDirectionX(0);
+    bob.setDirectionY(0);    
+    bob.setPointDirection((int)(Math.random()*360));
+    bob.setX((int)(Math.random()*501));
+    bob.setY((int)(Math.random()*501));
+    //fill(255);
+    //rect(0, 0, 800, 800);
+  }
+
+  if (key == 's')
+  {
+    bob.accelerate(-0.5);
   }
 }
 class SpaceShip extends Floater  
@@ -47,8 +84,8 @@ class SpaceShip extends Floater
       xCorners[8]= 16;
       yCorners[8] = 0;
 
-      myCenterX = 250;
-      myCenterY = 250;
+      myCenterX = 400;
+      myCenterY = 400;
 
       myDirectionX = 0;
       myDirectionY = 0;
@@ -70,6 +107,23 @@ class SpaceShip extends Floater
     public double getPointDirection() {return myPointDirection;}
 
 }
+
+public class Star
+{
+  private int myX, myY;
+  public Star()
+  {
+      myX = (int)(Math.random()*800);
+      myY = (int)(Math.random()*800);
+  }
+
+  public void show()
+  {
+    fill(255);
+    ellipse(myX, myY, 1, 1);
+  }
+}
+
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
   protected int corners;  //the number of corners, a triangular floater has 3   
