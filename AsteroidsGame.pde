@@ -1,11 +1,13 @@
 //your variable declarations here
 SpaceShip bob;
 Star [] spaceStars = new Star[250];
+Rocket sue;
 public void setup() 
 {
   //your code here
   size(800, 800);
   bob = new SpaceShip();
+  sue = new Rocket();
   for (int i = 0; i < spaceStars.length; i ++)
   {
     spaceStars[i] = new Star();
@@ -18,6 +20,7 @@ public void draw()
   background(0);
   bob.show();
   bob.move();
+  sue.move();
   for (int i = 0; i < spaceStars.length; i ++)
   {
     spaceStars[i].show();
@@ -29,16 +32,20 @@ public void keyPressed()
   if (key == 'a')
   {
     bob.rotate(-10);
+    sue.rotate(-10);
   }
 
   if (key == 'd')
   {
     bob.rotate(10);
+    sue.rotate(10);
   }
 
   if (key == 'w')
   {
     bob.accelerate(0.5);
+    sue.accelerate(0.5);
+    sue.show();
   }
 
   if(key == 'h')
@@ -48,13 +55,14 @@ public void keyPressed()
     bob.setPointDirection((int)(Math.random()*360));
     bob.setX((int)(Math.random()*501));
     bob.setY((int)(Math.random()*501));
-    //fill(255);
-    //rect(0, 0, 800, 800);
+    fill(255);
+    rect(0, 0, 800, 800);
   }
 
   if (key == 's')
   {
     bob.accelerate(-0.5);
+    sue.accelerate(-0.5);
   }
 }
 class SpaceShip extends Floater  
@@ -94,7 +102,40 @@ class SpaceShip extends Floater
 
       myPointDirection = 0;
     }
+    public void setX(int x) {myCenterX = x;}    
+    public int getX() {return (int)myCenterX;}   
+    public void setY(int y) {myCenterY = y;}    
+    public int getY() {return (int)myCenterY;}
+    public void setDirectionX(double x) {myDirectionX = x;}
+    public double getDirectionX() {return myDirectionX;}
+    public void setDirectionY(double y) {myDirectionY = y;}
+    public double getDirectionY() {return myDirectionY;}
+    public void setPointDirection(int degrees) {myPointDirection = degrees;}
+    public double getPointDirection() {return myPointDirection;}
 
+}
+
+public class Rocket extends Floater
+{
+  public Rocket()
+  {
+    corners = 3;
+      xCorners = new int[corners];
+      yCorners = new int[corners];
+      xCorners[0]= -30;
+      yCorners[0] = 0;
+      xCorners[1]= -20;
+      yCorners[1] = -10;
+      xCorners[2]= -20;
+      yCorners[2] = 10;
+
+      myCenterX = 400;
+      myCenterY = 400;
+      myDirectionX = 0;
+      myDirectionY = 0;
+      myPointDirection = 0;
+      myColor = color(255, 0, 0);        
+  }
     public void setX(int x) {myCenterX = x;}    
     public int getX() {return (int)myCenterX;}   
     public void setY(int y) {myCenterY = y;}    
