@@ -4,7 +4,6 @@ Star [] spaceStars = new Star[250];
 Rocket sue;
 public void setup() 
 {
-  //your code here
   size(800, 800);
   bob = new SpaceShip();
   sue = new Rocket();
@@ -16,7 +15,6 @@ public void setup()
 
 public void draw() 
 {
-  //your code here
   background(0);
   bob.show();
   bob.move();
@@ -43,18 +41,26 @@ public void keyPressed()
 
   if (key == 'w')
   {
-    bob.accelerate(0.5);
-    sue.accelerate(0.5);
-    sue.show();
+    sue.show();    
+    sue.accelerate(0.1);    
+    bob.accelerate(0.1);
   }
 
   if(key == 'h')
   {
+    int randPointDirection = (int)(Math.random()*360);
+    int randSetX = (int)(Math.random()*501);
+    int randSetY = (int)(Math.random()*501);     
     bob.setDirectionX(0);
     bob.setDirectionY(0);    
-    bob.setPointDirection((int)(Math.random()*360));
-    bob.setX((int)(Math.random()*501));
-    bob.setY((int)(Math.random()*501));
+    bob.setPointDirection(randPointDirection);
+    bob.setX(randSetX);
+    bob.setY(randSetY);
+    sue.setDirectionX(0);
+    sue.setDirectionY(0);    
+    sue.setPointDirection(randPointDirection);
+    sue.setX(randSetX);
+    sue.setY(randSetY);
     fill(255);
     rect(0, 0, 800, 800);
   }
@@ -65,9 +71,9 @@ public void keyPressed()
     sue.accelerate(-0.5);
   }
 }
+
 class SpaceShip extends Floater  
-{   
-    //your code here
+{
     public SpaceShip()
     {
       corners = 9;
@@ -102,17 +108,17 @@ class SpaceShip extends Floater
 
       myPointDirection = 0;
     }
-    public void setX(int x) {myCenterX = x;}    
-    public int getX() {return (int)myCenterX;}   
-    public void setY(int y) {myCenterY = y;}    
-    public int getY() {return (int)myCenterY;}
-    public void setDirectionX(double x) {myDirectionX = x;}
-    public double getDirectionX() {return myDirectionX;}
-    public void setDirectionY(double y) {myDirectionY = y;}
-    public double getDirectionY() {return myDirectionY;}
-    public void setPointDirection(int degrees) {myPointDirection = degrees;}
-    public double getPointDirection() {return myPointDirection;}
 
+  public void setX(int x) {myCenterX = x;}    
+  public int getX() {return (int)myCenterX;}   
+  public void setY(int y) {myCenterY = y;}    
+  public int getY() {return (int)myCenterY;}
+  public void setDirectionX(double x) {myDirectionX = x;}
+  public double getDirectionX() {return myDirectionX;}
+  public void setDirectionY(double y) {myDirectionY = y;}
+  public double getDirectionY() {return myDirectionY;}
+  public void setPointDirection(int degrees) {myPointDirection = degrees;}
+  public double getPointDirection() {return myPointDirection;}
 }
 
 public class Rocket extends Floater
@@ -120,33 +126,33 @@ public class Rocket extends Floater
   public Rocket()
   {
     corners = 3;
-      xCorners = new int[corners];
-      yCorners = new int[corners];
-      xCorners[0]= -30;
-      yCorners[0] = 0;
-      xCorners[1]= -20;
-      yCorners[1] = -10;
-      xCorners[2]= -20;
-      yCorners[2] = 10;
+    xCorners = new int[corners];
+    yCorners = new int[corners];
+    xCorners[0]= -10;
+    yCorners[0] = -10;
+    xCorners[1]= -10;
+    yCorners[1] = 10;      
+    xCorners[2]= -30;
+    yCorners[2] = 0;
 
-      myCenterX = 400;
-      myCenterY = 400;
-      myDirectionX = 0;
-      myDirectionY = 0;
-      myPointDirection = 0;
-      myColor = color(255, 0, 0);        
+    myCenterX = 400;
+    myCenterY = 400;
+    myDirectionX = 0;
+    myDirectionY = 0;
+    myPointDirection = 0;
+    myColor = color(255, 0, 0);        
   }
-    public void setX(int x) {myCenterX = x;}    
-    public int getX() {return (int)myCenterX;}   
-    public void setY(int y) {myCenterY = y;}    
-    public int getY() {return (int)myCenterY;}
-    public void setDirectionX(double x) {myDirectionX = x;}
-    public double getDirectionX() {return myDirectionX;}
-    public void setDirectionY(double y) {myDirectionY = y;}
-    public double getDirectionY() {return myDirectionY;}
-    public void setPointDirection(int degrees) {myPointDirection = degrees;}
-    public double getPointDirection() {return myPointDirection;}
 
+  public void setX(int x) {myCenterX = x;}    
+  public int getX() {return (int)myCenterX;}   
+  public void setY(int y) {myCenterY = y;}    
+  public int getY() {return (int)myCenterY;}
+  public void setDirectionX(double x) {myDirectionX = x;}
+  public double getDirectionX() {return myDirectionX;}
+  public void setDirectionY(double y) {myDirectionY = y;}
+  public double getDirectionY() {return myDirectionY;}
+  public void setPointDirection(int degrees) {myPointDirection = degrees;}
+  public double getPointDirection() {return myPointDirection;}
 }
 
 public class Star
@@ -154,8 +160,8 @@ public class Star
   private int myX, myY;
   public Star()
   {
-      myX = (int)(Math.random()*800);
-      myY = (int)(Math.random()*800);
+    myX = (int)(Math.random()*800);
+    myY = (int)(Math.random()*800);
   }
 
   public void show()
