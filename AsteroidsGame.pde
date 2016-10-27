@@ -61,8 +61,8 @@ public void keyPressed()
     sue.setPointDirection(randPointDirection);
     sue.setX(randSetX);
     sue.setY(randSetY);
-    fill(255);
-    rect(0, 0, 800, 800);
+    //fill(255);
+    //rect(0, 0, 800, 800);
   }
 
   if (key == 's')
@@ -110,7 +110,7 @@ class SpaceShip extends Floater
     }
 
   public void setX(int x) {myCenterX = x;}    
-  public int getX() {return (int)myCenterX;}   
+  public int getX() {return (int)myCenterX;} 
   public void setY(int y) {myCenterY = y;}    
   public int getY() {return (int)myCenterY;}
   public void setDirectionX(double x) {myDirectionX = x;}
@@ -128,11 +128,11 @@ public class Rocket extends Floater
     corners = 3;
     xCorners = new int[corners];
     yCorners = new int[corners];
-    xCorners[0]= -10;
-    yCorners[0] = -10;
-    xCorners[1]= -10;
-    yCorners[1] = 10;      
-    xCorners[2]= -30;
+    xCorners[0]= -13;
+    yCorners[0] = -7;
+    xCorners[1]= -13;
+    yCorners[1] = 7;      
+    xCorners[2]= -20;
     yCorners[2] = 0;
 
     myCenterX = 400;
@@ -169,6 +169,26 @@ public class Star
     fill(255);
     ellipse(myX, myY, 1, 1);
   }
+}
+
+public class Asteroids extends Floater
+{
+  private int sRotate;
+  public Asteroids()
+  {
+
+  }
+  public void setX(int x) {myCenterX = x;}    
+  public int getX() {return (int)myCenterX;}   
+  public void setY(int y) {myCenterY = y;}    
+  public int getY() {return (int)myCenterY;}
+  public void setDirectionX(double x) {myDirectionX = x;}
+  public double getDirectionX() {return myDirectionX;}
+  public void setDirectionY(double y) {myDirectionY = y;}
+  public double getDirectionY() {return myDirectionY;}
+  public void setPointDirection(int degrees) {myPointDirection = degrees;}
+  public double getPointDirection() {return myPointDirection;}
+
 }
 
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
