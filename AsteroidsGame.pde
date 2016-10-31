@@ -2,11 +2,13 @@
 SpaceShip bob;
 Star [] spaceStars = new Star[250];
 Rocket sue;
+Asteroids rock;
 public void setup() 
 {
   size(800, 800);
   bob = new SpaceShip();
   sue = new Rocket();
+  rock = new Asteroids();
   for (int i = 0; i < spaceStars.length; i ++)
   {
     spaceStars[i] = new Star();
@@ -23,6 +25,8 @@ public void draw()
   {
     spaceStars[i].show();
   }
+  rock.show();
+  rock.move();
 }
 
 public void keyPressed()
@@ -173,10 +177,36 @@ public class Star
 
 public class Asteroids extends Floater
 {
-  private int sRotate;
+  private int rotSpeed;
   public Asteroids()
   {
+    corners = 6;
+    xCorners = new int[corners];
+    yCorners = new int[corners];
+    xCorners[0] = -11;
+    yCorners[0] = -8;
+    xCorners[1] = 7;
+    yCorners[1] = -8;      
+    xCorners[2] = 13;
+    yCorners[2] = 0;
+    xCorners[3] = 6;
+    yCorners[3] = 10;
+    xCorners[4] = -11;
+    yCorners[4] = 8;
+    xCorners[5] = -5;
+    yCorners[5] = 0;
 
+     myCenterX = (int)(Math.random()*800);
+      myCenterY = (int)(Math.random()*800);
+
+      myDirectionX = 0;
+      myDirectionY = 0;
+
+      myColor = color(255);
+
+      myPointDirection = 0;
+
+    rotSpeed = (int)((Math.random()*5)-2);
   }
   public void setX(int x) {myCenterX = x;}    
   public int getX() {return (int)myCenterX;}   
@@ -189,6 +219,11 @@ public class Asteroids extends Floater
   public void setPointDirection(int degrees) {myPointDirection = degrees;}
   public double getPointDirection() {return myPointDirection;}
 
+  public void move()
+  {
+    rotate(rotSpeed);
+    super.move();
+  }
 }
 
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
