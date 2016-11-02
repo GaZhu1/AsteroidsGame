@@ -50,13 +50,13 @@ public void keyPressed()
     sue.rotate(10);
   }
 
-  if (key == 'w')
+  if(key == 'w')
   {
     sue.show();    
     sue.accelerate(0.1);    
     bob.accelerate(0.1);
   }
-
+  
   if(key == 'h')
   {
     int randPointDirection = (int)(Math.random()*360);
