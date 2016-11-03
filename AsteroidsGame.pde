@@ -22,13 +22,13 @@ public void setup()
 public void draw() 
 {
   background(0);
-  bob.move();
-  bob.show();  
   sue.move();
   for (int i = 0; i < spaceStars.length; i ++)
   {
     spaceStars[i].show();
   }
+  bob.move();
+  bob.show();  
     for (int i = 0; i < rocks.length; i ++)
   {
     rocks[i].show();
@@ -175,8 +175,9 @@ public class Star
 
   public void show()
   {
-    fill(255);
-    ellipse(myX, myY, 1, 1);
+    fill((int)(Math.random()*256)+100,(int)(Math.random()*256)+100,(int)(Math.random()*256)+100);
+    noStroke();
+    ellipse(myX, myY, 2, 2);
   }
 }
 
@@ -191,7 +192,7 @@ public class Asteroids extends Floater
     xCorners[0] = -11;
     yCorners[0] = -8;
     xCorners[1] = 7;
-    yCorners[1] = -10;      
+    yCorners[1] = -10;
     xCorners[2] = 10;
     yCorners[2] = 0;
     xCorners[3] = 6;
@@ -211,7 +212,7 @@ public class Asteroids extends Floater
 
     myPointDirection = (int)(Math.random()*360);
 
-    rotSpeed = (int)((Math.random()*5)-2);
+    rotSpeed = (int)((Math.random()*2)-3);
   }
   public void setX(int x) {myCenterX = x;}    
   public int getX() {return (int)myCenterX;}   
