@@ -1,13 +1,13 @@
 //your variable declarations here
 SpaceShip bob;
 Star [] spaceStars = new Star[250];
-Rocket sue;
+Rocket rocket;
 Asteroids [] rocks = new Asteroids[20];
 public void setup() 
 {
   size(800, 800);
   bob = new SpaceShip();
-  sue = new Rocket();
+  rocket = new Rocket();
   for (int i = 0; i < spaceStars.length; i ++)
   {
     spaceStars[i] = new Star();
@@ -22,7 +22,7 @@ public void setup()
 public void draw() 
 {
   background(0);
-  sue.move();
+  rocket.move();
   for (int i = 0; i < spaceStars.length; i ++)
   {
     spaceStars[i].show();
@@ -34,6 +34,15 @@ public void draw()
     rocks[i].show();
     rocks[i].move();
   }
+
+  //checks if ship collides with asteroid
+  
+  if(get(bob.getX(), bob.getY()) == color(190, 150, 150))
+  {
+    System.out.println("hit");  
+  }
+
+
 }
 
 public void keyPressed()
@@ -41,19 +50,19 @@ public void keyPressed()
   if (key == 'a')
   {
     bob.rotate(-10);
-    sue.rotate(-10);
+    rocket.rotate(-10);
   }
 
   if (key == 'd')
   {
     bob.rotate(10);
-    sue.rotate(10);
+    rocket.rotate(10);
   }
 
   if(key == 'w')
   {
-    sue.show();    
-    sue.accelerate(0.1);    
+    rocket.show();    
+    rocket.accelerate(0.1);    
     bob.accelerate(0.1);
   }
   
@@ -67,17 +76,17 @@ public void keyPressed()
     bob.setPointDirection(randPointDirection);
     bob.setX(randSetX);
     bob.setY(randSetY);
-    sue.setDirectionX(0);
-    sue.setDirectionY(0);    
-    sue.setPointDirection(randPointDirection);
-    sue.setX(randSetX);
-    sue.setY(randSetY);
+    rocket.setDirectionX(0);
+    rocket.setDirectionY(0);    
+    rocket.setPointDirection(randPointDirection);
+    rocket.setX(randSetX);
+    rocket.setY(randSetY);
   }
 
   if (key == 's')
   {
     bob.accelerate(-0.5);
-    sue.accelerate(-0.5);
+    rocket.accelerate(-0.5);
   }
 }
 
