@@ -37,11 +37,10 @@ public void draw()
 
   //checks if ship collides with asteroid
   
-  if(get(bob.getX(), bob.getY()) == color(190, 150, 150))
-  {
-    System.out.println("hit");  
-  }
-
+//  if(get(bob.getX(), bob.getY()) == color(190, 150, 150))
+ // {
+ //   System.out.println("hit");  
+//  }
 
 }
 
