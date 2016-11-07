@@ -2,7 +2,8 @@
 SpaceShip bob;
 Star [] spaceStars = new Star[250];
 Rocket rocket;
-Asteroids [] rocks = new Asteroids[20];
+ArrayList <Asteroids> theList;
+Asteroids rock = new Asteroids();
 public void setup() 
 {
   size(800, 800);
@@ -12,11 +13,14 @@ public void setup()
   {
     spaceStars[i] = new Star();
   }
+theList = new ArrayList <Asteroids>();
+ //   for (int i = 0; i < rocks.length; i ++)
+ // {
+  //  rocks[i] = new Asteroids();
+  //}
 
-    for (int i = 0; i < rocks.length; i ++)
-  {
-    rocks[i] = new Asteroids();
-  }
+  theList.add(rock);
+  theList.add(new Asteroids());
 }
 
 public void draw() 
@@ -29,19 +33,13 @@ public void draw()
   }
   bob.move();
   bob.show();  
-    for (int i = 0; i < rocks.length; i ++)
-  {
-    rocks[i].show();
-    rocks[i].move();
-  }
-
-  //checks if ship collides with asteroid
-  
-//  if(get(bob.getX(), bob.getY()) == color(190, 150, 150))
- // {
- //   System.out.println("hit");  
-//  }
-
+  //  for (int i = 0; i < rocks.length; i ++)
+  //{
+  //  rocks[i].show();
+  //  rocks[i].move();
+  //}
+  rock.show();
+  rock.move();
 }
 
 public void keyPressed()
