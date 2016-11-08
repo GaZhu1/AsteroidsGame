@@ -21,7 +21,6 @@ public void setup()
   theList.add(i, new Asteroids());
  }
 
-  System.out.println(theList.size());
 }
 
 public void draw() 
