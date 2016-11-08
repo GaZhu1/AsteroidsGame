@@ -3,7 +3,7 @@ SpaceShip bob;
 Star [] spaceStars = new Star[250];
 Rocket rocket;
 ArrayList <Asteroids> theList;
-Asteroids rock = new Asteroids();
+
 public void setup() 
 {
   size(800, 800);
@@ -13,14 +13,15 @@ public void setup()
   {
     spaceStars[i] = new Star();
   }
-theList = new ArrayList <Asteroids>();
- //   for (int i = 0; i < rocks.length; i ++)
- // {
-  //  rocks[i] = new Asteroids();
-  //}
 
-  theList.add(rock);
-  theList.add(new Asteroids());
+ theList = new ArrayList <Asteroids>(); 
+
+ for (int i = 0; i < 4; i ++)
+ {
+  theList.add(i, new Asteroids());
+ }
+
+  System.out.println(theList.size());
 }
 
 public void draw() 
@@ -32,14 +33,13 @@ public void draw()
     spaceStars[i].show();
   }
   bob.move();
-  bob.show();  
-  //  for (int i = 0; i < rocks.length; i ++)
-  //{
-  //  rocks[i].show();
-  //  rocks[i].move();
-  //}
-  rock.show();
-  rock.move();
+  bob.show(); 
+
+  for( int nI = 0; nI < theList.size(); nI++)
+  {
+    theList.get(nI).show();
+    theList.get(nI).move();
+  }
 }
 
 public void keyPressed()
