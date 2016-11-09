@@ -217,7 +217,7 @@ public class Asteroids extends Floater
 
     myPointDirection = (int)(Math.random()*360);
 
-    rotSpeed = (int)((Math.random()*2)-3);
+    rotSpeed = (int)((Math.random()*5)-3);
   }
   public void setX(int x) {myCenterX = x;}    
   public int getX() {return (int)myCenterX;}   
