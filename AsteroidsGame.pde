@@ -16,7 +16,7 @@ public void setup()
 
  theList = new ArrayList <Asteroids>(); 
 
- for (int i = 0; i < 4; i ++)
+ for (int i = 0; i < 20; i ++)
  {
   theList.add(i, new Asteroids());
  }
