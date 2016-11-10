@@ -2,8 +2,8 @@
 SpaceShip bob;
 Star [] spaceStars = new Star[250];
 Rocket rocket;
-ArrayList <Asteroids> theList;
-
+ArrayList <Asteroids> asteroidBelt;
+//Bullet shoot;
 public void setup() 
 {
   size(800, 800);
@@ -14,15 +14,15 @@ public void setup()
     spaceStars[i] = new Star();
   }
 
- theList = new ArrayList <Asteroids>(); 
+ asteroidBelt = new ArrayList <Asteroids>(); 
 
  for (int i = 0; i < 20; i ++)
  {
-  theList.add(i, new Asteroids());
+  asteroidBelt.add(i, new Asteroids());
  }
-
+ //shoot = new Bullet();
 }
-
+ 
 public void draw() 
 {
   background(0);
@@ -34,11 +34,23 @@ public void draw()
   bob.move();
   bob.show(); 
 
-  for( int nI = 0; nI < theList.size(); nI++)
+
+  for(int nI = 0; nI < asteroidBelt.size(); nI++)
   {
-    theList.get(nI).show();
-    theList.get(nI).move();
+    asteroidBelt.get(nI).show();
+    asteroidBelt.get(nI).move(); 
   }
+
+  for(int nI = asteroidBelt.size()-1; nI >= 0; nI--)
+  {
+    if(dist(bob.getX(), bob.getY(), asteroidBelt.get(nI).getX(), asteroidBelt.get(nI).getY()) < 20)
+    {
+      asteroidBelt.remove(nI);
+    } 
+  }
+
+//shoot.show();
+//shoot.move();
 }
 
 public void keyPressed()
@@ -65,8 +77,8 @@ public void keyPressed()
   if(key == 'h')
   {
     int randPointDirection = (int)(Math.random()*360);
-    int randSetX = (int)(Math.random()*501);
-    int randSetY = (int)(Math.random()*501);     
+    int randSetX = (int)(Math.random()*801);
+    int randSetY = (int)(Math.random()*801);     
     bob.setDirectionX(0);
     bob.setDirectionY(0);    
     bob.setPointDirection(randPointDirection);
@@ -201,7 +213,7 @@ public class Asteroids extends Floater
     xCorners[2] = 10;
     yCorners[2] = 0;
     xCorners[3] = 6;
-    yCorners[3] = 13;
+    yCorners[3] = 10;
     xCorners[4] = -11;
     yCorners[4] = 8;
     xCorners[5] = -13;
@@ -217,7 +229,7 @@ public class Asteroids extends Floater
 
     myPointDirection = (int)(Math.random()*360);
 
-    rotSpeed = (int)((Math.random()*5)-3);
+    rotSpeed = (int)((Math.random()*2)-3);
   }
   public void setX(int x) {myCenterX = x;}    
   public int getX() {return (int)myCenterX;}   
@@ -236,6 +248,26 @@ public class Asteroids extends Floater
     super.move();
   }
 }
+
+/*public class Bullet extends floater
+{
+  public Bullet(SpaceShip theShip)
+  {
+    myCenterX = theShip;
+    myCenterY = theShip;
+    myPointDirection = theShip;
+    myPointDirection = double dRadians =myPointDirection*(Math.PI/180);
+    myDirectionX = 5*Math.cos(dRadians) + myDirectionX;
+    myDirectionY = 5*Math.sin(dRadians) = myDirectionY;
+  }
+
+  public void show()
+  {
+    fill(255);
+    ellipse(myCenterX, myCenterY, 2, 2);
+    super.show();
+  }
+}*/
 
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
