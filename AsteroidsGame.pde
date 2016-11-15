@@ -3,8 +3,8 @@ SpaceShip bob;
 Star [] spaceStars = new Star[250];
 Rocket rocket;
 ArrayList <Asteroids> asteroidBelt;
-//ArrayList <Bullet> bullets;
-//Bullet shoot;
+ArrayList <Bullet> bullets;
+
 public void setup() 
 {
   size(800, 800);
@@ -21,9 +21,8 @@ public void setup()
  {
   asteroidBelt.add(i, new Asteroids());
  }
-// shoot = new Bullet(bob);
- //bullets = new ArrayList <Bullet>();
 
+ bullets = new ArrayList <Bullet>();
 }
  
 public void draw() 
@@ -52,8 +51,20 @@ public void draw()
     } 
   }
 
-//shoot.show();
-//shoot.move();
+/*for(int nI = asteroidBelt.size()-1; nI >= 0; nI--)
+  {
+    if(dist(asteroidBelt.get(nI).getX(), asteroidBelt.get(nI).getY(), bullets.get(nI).getX(), bullets.get(nI)) < 2)
+    {
+      asteroidBelt.remove(nI);
+      bullets.remove(nI);
+    }
+  }
+*/
+  for(int nI = 0; nI < bullets.size(); nI++)
+  {
+    bullets.get(nI).show();
+    bullets.get(nI).move(); 
+  }
 }
 
 public void keyPressed()
@@ -100,14 +111,14 @@ public void keyPressed()
     rocket.accelerate(-0.5);
   }
 
-/*  if (key = ' ')
+ if (key == ' ')
   {
-    for(int i = 0; i < 5; i++)
+    for(int i = 0; i < 200; i++)
     {
       bullets.add(i, new Bullet(bob));
     }
   }
-  */
+
 }
 
 class SpaceShip extends Floater  
@@ -278,10 +289,16 @@ public class Bullet extends Floater
     noStroke();
     fill(255);
     ellipse((float)myCenterX, (float)myCenterY, 3, 3);
-    super.show();
+  
   }
 
-    public void setX(int x) {myCenterX = x;}    
+  public void move()
+  {
+    myCenterX += myDirectionX;    
+    myCenterY += myDirectionY;   
+  }
+
+  public void setX(int x) {myCenterX = x;}    
   public int getX() {return (int)myCenterX;}   
   public void setY(int y) {myCenterY = y;}    
   public int getY() {return (int)myCenterY;}
