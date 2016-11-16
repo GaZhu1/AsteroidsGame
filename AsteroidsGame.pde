@@ -4,6 +4,8 @@ Star [] spaceStars = new Star[250];
 Rocket rocket;
 ArrayList <Asteroids> asteroidBelt;
 ArrayList <Bullet> bullets;
+int score = 0;
+int health = 100;
 
 public void setup() 
 {
@@ -47,24 +49,34 @@ public void draw()
   {
     if(dist(bob.getX(), bob.getY(), asteroidBelt.get(nI).getX(), asteroidBelt.get(nI).getY()) < 20)
     {
+      health = health - 5;
       asteroidBelt.remove(nI);
     } 
   }
 
-/*for(int nI = asteroidBelt.size()-1; nI >= 0; nI--)
+  for(int aI = asteroidBelt.size()-1; aI >= 0; aI--)
   {
-    if(dist(asteroidBelt.get(nI).getX(), asteroidBelt.get(nI).getY(), bullets.get(nI).getX(), bullets.get(nI)) < 2)
+    for (int bI = bullets.size() - 1; bI >= 0; bI --)
     {
-      asteroidBelt.remove(nI);
-      bullets.remove(nI);
+      if(dist(bullets.get(bI).getX(), bullets.get(bI).getY(), asteroidBelt.get(aI).getX(), asteroidBelt.get(aI).getY()) < 15)
+      {
+        score = score + 10;
+        bullets.remove(bI);        
+        asteroidBelt.remove(aI);
+        break;
+      }  
     }
   }
-*/
+
   for(int nI = 0; nI < bullets.size(); nI++)
   {
     bullets.get(nI).show();
     bullets.get(nI).move(); 
   }
+  fill(255);
+  textSize(24);
+  text("Score: " + score, 10, 30);
+  text("Health: " + health, 650, 30);
 }
 
 public void keyPressed()
@@ -113,7 +125,7 @@ public void keyPressed()
 
  if (key == ' ')
   {
-    for(int i = 0; i < 200; i++)
+    for(int i = 0; i < 1; i++)
     {
       bullets.add(i, new Bullet(bob));
     }
@@ -215,7 +227,7 @@ public class Star
 
   public void show()
   {
-    fill((int)(Math.random()*256)+100,(int)(Math.random()*256)+100,(int)(Math.random()*256)+100);
+    fill((int)((Math.random()*256)+100), (int)((Math.random()*256)+100), (int)((Math.random()*256)+100));
     noStroke();
     ellipse(myX, myY, 2, 2);
   }
@@ -231,14 +243,14 @@ public class Asteroids extends Floater
     yCorners = new int[corners];
     xCorners[0] = -11;
     yCorners[0] = -8;
-    xCorners[1] = 7;
+    xCorners[1] = (int)(Math.random()*9)+6;
     yCorners[1] = -10;
-    xCorners[2] = 10;
+    xCorners[2] = (int)(Math.random()*11)+9;
     yCorners[2] = 0;
-    xCorners[3] = 6;
-    yCorners[3] = 10;
+    xCorners[3] = (int)(Math.random()*8)+5;
+    yCorners[3] = (int)(Math.random()*10)+9;
     xCorners[4] = -11;
-    yCorners[4] = 8;
+    yCorners[4] = (int)(Math.random()*9)+7;
     xCorners[5] = -13;
     yCorners[5] = 0;
 
@@ -248,7 +260,7 @@ public class Asteroids extends Floater
     myDirectionX = (Math.random()*3)-1;
     myDirectionY = (Math.random()*3)-1;
 
-    myColor = color(190, 150, 150);
+    myColor = color(170);
 
     myPointDirection = (int)(Math.random()*360);
 
@@ -288,7 +300,7 @@ public class Bullet extends Floater
   {
     noStroke();
     fill(255);
-    ellipse((float)myCenterX, (float)myCenterY, 3, 3);
+    ellipse((float)myCenterX, (float)myCenterY, 4, 4);
   
   }
 
