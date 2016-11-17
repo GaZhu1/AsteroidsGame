@@ -9,7 +9,7 @@ int health = 100;
 
 public void setup() 
 {
-  size(800, 800);
+  size(850, 850);
   bob = new SpaceShip();
   rocket = new Rocket();
   for (int i = 0; i < spaceStars.length; i ++)
@@ -19,7 +19,7 @@ public void setup()
 
  asteroidBelt = new ArrayList <Asteroids>(); 
 
- for (int i = 0; i < 20; i ++)
+ for (int i = 0; i < 25; i ++)
  {
   asteroidBelt.add(i, new Asteroids());
  }
@@ -35,9 +35,9 @@ public void draw()
   {
     spaceStars[i].show();
   }
+
   bob.move();
   bob.show(); 
-
 
   for(int nI = 0; nI < asteroidBelt.size(); nI++)
   {
@@ -45,15 +45,17 @@ public void draw()
     asteroidBelt.get(nI).move(); 
   }
 
+  //ship colliding with asteroids
   for(int nI = asteroidBelt.size()-1; nI >= 0; nI--)
   {
     if(dist(bob.getX(), bob.getY(), asteroidBelt.get(nI).getX(), asteroidBelt.get(nI).getY()) < 20)
     {
-      health = health - 5;
+      health = health - 10;
       asteroidBelt.remove(nI);
     } 
   }
 
+  //bullet colliding with asteroids
   for(int aI = asteroidBelt.size()-1; aI >= 0; aI--)
   {
     for (int bI = bullets.size() - 1; bI >= 0; bI --)
@@ -73,6 +75,8 @@ public void draw()
     bullets.get(nI).show();
     bullets.get(nI).move(); 
   }
+
+
   fill(255);
   textSize(24);
   text("Score: " + score, 10, 30);
@@ -159,8 +163,8 @@ class SpaceShip extends Floater
       xCorners[8]= 16;
       yCorners[8] = 0;
 
-      myCenterX = 400;
-      myCenterY = 400;
+      myCenterX = 425;
+      myCenterY = 425;
 
       myDirectionX = 0;
       myDirectionY = 0;
@@ -196,8 +200,8 @@ public class Rocket extends Floater
     xCorners[2]= -20;
     yCorners[2] = 0;
 
-    myCenterX = 400;
-    myCenterY = 400;
+    myCenterX = 425;
+    myCenterY = 425;
     myDirectionX = 0;
     myDirectionY = 0;
     myPointDirection = 0;
@@ -221,8 +225,8 @@ public class Star
   private int myX, myY;
   public Star()
   {
-    myX = (int)(Math.random()*800);
-    myY = (int)(Math.random()*800);
+    myX = (int)(Math.random()*851);
+    myY = (int)(Math.random()*851);
   }
 
   public void show()
