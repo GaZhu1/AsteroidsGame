@@ -6,6 +6,7 @@ ArrayList <Asteroids> asteroidBelt;
 ArrayList <Bullet> bullets;
 int score = 0;
 int health = 100;
+boolean gameOver = false;
 
 public void setup() 
 {
@@ -79,8 +80,34 @@ public void draw()
 
   fill(255);
   textSize(24);
+  int shipColor;
   text("Score: " + score, 10, 30);
+  if(health >= 70 )
+  {
+    shipColor = color(50, 255, 50);
+  }
+  else if (health >= 30)
+  {
+    shipColor = color(255, 255, 0);
+  }
+  else
+  {
+    shipColor = color(255, 50, 50);
+  }
+  fill(shipColor);
   text("Health: " + health, 650, 30);
+
+  if(health <= 0)
+  {
+    gameOver = true;
+  }
+
+  /*if(gameOver == true)
+  {
+    fill(0);
+    rect(0, 0, 1000, 1000);
+  }
+  */
 }
 
 public void keyPressed()
