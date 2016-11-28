@@ -30,6 +30,17 @@ public void setup()
  
 public void draw() 
 {
+
+  if(gameOver == true)
+  {
+    fill(0);
+    rect(0, 0, 1000, 1000);
+    fill(255);
+    textAlign(CENTER);
+    text("Game Over", 425, 425);
+  }
+  else
+  {
   background(0);
   rocket.move();
   for (int i = 0; i < spaceStars.length; i ++)
@@ -96,71 +107,73 @@ public void draw()
   }
   fill(shipColor);
   text("Health: " + health, 650, 30);
+  
+  }
+
 
   if(health <= 0)
   {
     gameOver = true;
   }
 
-  /*if(gameOver == true)
-  {
-    fill(0);
-    rect(0, 0, 1000, 1000);
-  }
-  */
 }
 
 public void keyPressed()
 {
-  if (key == 'a')
+  if(gameOver == false)
   {
-    bob.rotate(-10);
-    rocket.rotate(-10);
-  }
-
-  if (key == 'd')
-  {
-    bob.rotate(10);
-    rocket.rotate(10);
-  }
-
-  if(key == 'w')
-  {
-    rocket.show();    
-    rocket.accelerate(0.1);    
-    bob.accelerate(0.1);
-  }
-  
-  if(key == 'h')
-  {
-    int randPointDirection = (int)(Math.random()*360);
-    int randSetX = (int)(Math.random()*801);
-    int randSetY = (int)(Math.random()*801);     
-    bob.setDirectionX(0);
-    bob.setDirectionY(0);    
-    bob.setPointDirection(randPointDirection);
-    bob.setX(randSetX);
-    bob.setY(randSetY);
-    rocket.setDirectionX(0);
-    rocket.setDirectionY(0);    
-    rocket.setPointDirection(randPointDirection);
-    rocket.setX(randSetX);
-    rocket.setY(randSetY);
-  }
-
-  if (key == 's')
-  {
-    bob.accelerate(-0.5);
-    rocket.accelerate(-0.5);
-  }
-
- if (key == ' ')
-  {
-    for(int i = 0; i < 1; i++)
+    if (key == 'a')
     {
-      bullets.add(i, new Bullet(bob));
+      bob.rotate(-10);
+      rocket.rotate(-10);
     }
+
+    if (key == 'd')
+    {
+      bob.rotate(10);
+      rocket.rotate(10);
+    }
+
+    if(key == 'w')
+    {
+      rocket.show();    
+      rocket.accelerate(0.1);    
+      bob.accelerate(0.1);
+    }
+    
+    if(key == 'h')
+    {
+      int randPointDirection = (int)(Math.random()*360);
+      int randSetX = (int)(Math.random()*801);
+      int randSetY = (int)(Math.random()*801);     
+      bob.setDirectionX(0);
+      bob.setDirectionY(0);    
+      bob.setPointDirection(randPointDirection);
+      bob.setX(randSetX);
+      bob.setY(randSetY);
+      rocket.setDirectionX(0);
+      rocket.setDirectionY(0);    
+      rocket.setPointDirection(randPointDirection);
+      rocket.setX(randSetX);
+      rocket.setY(randSetY);
+    }
+
+    if (key == 's')
+    {
+      bob.accelerate(-0.5);
+      rocket.accelerate(-0.5);
+    }
+
+   if (key == ' ')
+    {
+      for(int i = 0; i < 1; i++)
+      {
+        bullets.add(i, new Bullet(bob));
+      }
+    }    
   }
+
+
 
 }
 
