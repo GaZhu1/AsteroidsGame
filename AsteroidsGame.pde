@@ -38,9 +38,9 @@ public void draw()
     rect(0, 0, 1000, 1000);
     fill(255);
     textAlign(CENTER);
-    textSize(100);
+    textSize(80);
     text("Game Over", 425, 425);
-    text("Score: ", 425, 500);
+    text("Score: " + score, 425, 500);
   }
   else if (win == true)
   {
@@ -106,7 +106,7 @@ public void draw()
   textSize(24);
   int shipColor;
   text("Score: " + score, 10, 30);
-  if(health >= 70 )
+  if(health > 50 )
   {
     shipColor = color(50, 255, 50);
   }
