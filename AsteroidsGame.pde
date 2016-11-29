@@ -7,6 +7,7 @@ ArrayList <Bullet> bullets;
 int score = 0;
 int health = 100;
 boolean gameOver = false;
+boolean win = false;
 
 public void setup() 
 {
@@ -20,7 +21,7 @@ public void setup()
 
  asteroidBelt = new ArrayList <Asteroids>(); 
 
- for (int i = 0; i < 25; i ++)
+ for (int i = 0; i < 20; i ++)
  {
   asteroidBelt.add(i, new Asteroids());
  }
@@ -31,16 +32,28 @@ public void setup()
 public void draw() 
 {
 
-  if(gameOver == true)
+  if(gameOver == true && win == false)
   {
     fill(0);
     rect(0, 0, 1000, 1000);
     fill(255);
     textAlign(CENTER);
+    textSize(100);
     text("Game Over", 425, 425);
+    text("Score: ", 425, 500);
   }
-  else
+  else if (win == true)
   {
+    fill(0);
+    rect(0, 0, 1000, 1000);
+    fill(255);
+    textAlign(CENTER);
+    textSize(90);
+    text("You win!", 425, 425);
+    textSize(75);
+    text("Score: " + score, 425, 525);
+  }
+  else {
   background(0);
   rocket.move();
   for (int i = 0; i < spaceStars.length; i ++)
@@ -106,7 +119,7 @@ public void draw()
     shipColor = color(255, 50, 50);
   }
   fill(shipColor);
-  text("Health: " + health, 650, 30);
+  text("Health: " + health, 705, 30);
   
   }
 
@@ -114,6 +127,11 @@ public void draw()
   if(health <= 0)
   {
     gameOver = true;
+  }
+
+  if(asteroidBelt.size() == 0)
+  {
+    win = true;
   }
 
 }
