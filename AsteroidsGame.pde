@@ -6,6 +6,7 @@ ArrayList <Asteroids> asteroidBelt;
 ArrayList <Bullet> bullets;
 int score = 0;
 int health = 100;
+Health pack;
 boolean gameOver = false;
 boolean win = false;
 
@@ -14,6 +15,7 @@ public void setup()
   size(850, 850);
   bob = new SpaceShip();
   rocket = new Rocket();
+  pack = new Health();
   for (int i = 0; i < spaceStars.length; i ++)
   {
     spaceStars[i] = new Star();
@@ -21,10 +23,12 @@ public void setup()
 
  asteroidBelt = new ArrayList <Asteroids>(); 
 
- for (int i = 0; i < 20; i ++)
+ for (int i = 0; i < 15; i ++)
  {
   asteroidBelt.add(i, new Asteroids());
  }
+
+
 
  bullets = new ArrayList <Bullet>();
 }
@@ -70,6 +74,7 @@ public void draw()
     asteroidBelt.get(nI).move(); 
   }
 
+
   //ship colliding with asteroids
   for(int nI = asteroidBelt.size()-1; nI >= 0; nI--)
   {
@@ -80,6 +85,12 @@ public void draw()
     } 
   }
 
+  if(dist(bob.getX(), bob.getY(), pack.getX(), pack.getY()) < 10)
+  {
+    health = health + 50;
+    pack.setX(10000);
+  }
+
   //bullet colliding with asteroids
   for(int aI = asteroidBelt.size()-1; aI >= 0; aI--)
   {
@@ -88,8 +99,19 @@ public void draw()
       if(dist(bullets.get(bI).getX(), bullets.get(bI).getY(), asteroidBelt.get(aI).getX(), asteroidBelt.get(aI).getY()) < 15)
       {
         score = score + 10;
-        bullets.remove(bI);        
-        asteroidBelt.remove(aI);
+        bullets.remove(bI);
+        if(asteroidBelt.get(aI).getColor() == color(220))
+        {
+          asteroidBelt.get(aI).setColor(150);
+        }
+        else if(asteroidBelt.get(aI).getColor() == color(150))
+        {
+           asteroidBelt.get(aI).setColor(80);
+        }
+        else
+        {
+          asteroidBelt.remove(aI);
+        }
         break;
       }  
     }
@@ -121,6 +143,12 @@ public void draw()
   fill(shipColor);
   text("Health: " + health, 705, 30);
   
+  }
+
+  if(health <= 90)
+  {
+    pack.show();
+    pack.move();
   }
 
 
@@ -322,12 +350,15 @@ public class Asteroids extends Floater
     myDirectionX = (Math.random()*3)-1;
     myDirectionY = (Math.random()*3)-1;
 
-    myColor = color(170);
+    myColor = color(220);
 
     myPointDirection = (int)(Math.random()*360);
 
     rotSpeed = (int)((Math.random()*2)-3);
   }
+  public void setColor(int x) {myColor = color(x);}
+  public int getColor() {return myColor;}
+
   public void setX(int x) {myCenterX = x;}    
   public int getX() {return (int)myCenterX;}   
   public void setY(int y) {myCenterY = y;}    
@@ -344,6 +375,49 @@ public class Asteroids extends Floater
     rotate(rotSpeed);
     super.move();
   }
+}
+
+public class Health extends Floater
+{
+  public Health()
+  {
+    corners = 4;
+    xCorners = new int[corners];
+    yCorners = new int[corners];
+    xCorners[0] = 10;
+    yCorners[0] = -10;
+
+    xCorners[1] = -10;
+    yCorners[1] = -10;
+
+    xCorners[2] = -10;
+    yCorners[2] = 10;
+
+    xCorners[3] = 10;
+    yCorners[3] = 10;
+
+    myCenterX = (int)(Math.random()*800);
+    myCenterY = (int)(Math.random()*800);
+
+    myDirectionX = (Math.random()*3)-1;
+    myDirectionY = (Math.random()*3)-1;
+
+    myColor = color(10, 255, 10);
+
+    myPointDirection = (int)(Math.random()*360);
+
+
+  }
+  public void setX(int x) {myCenterX = x;}    
+  public int getX() {return (int)myCenterX;}   
+  public void setY(int y) {myCenterY = y;}    
+  public int getY() {return (int)myCenterY;}
+  public void setDirectionX(double x) {myDirectionX = x;}
+  public double getDirectionX() {return myDirectionX;}
+  public void setDirectionY(double y) {myDirectionY = y;}
+  public double getDirectionY() {return myDirectionY;}
+  public void setPointDirection(int degrees) {myPointDirection = degrees;}
+  public double getPointDirection() {return myPointDirection;}
 }
 
 public class Bullet extends Floater
