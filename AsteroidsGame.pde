@@ -85,10 +85,14 @@ public void draw()
     } 
   }
 
-  if(dist(bob.getX(), bob.getY(), pack.getX(), pack.getY()) < 10)
+  int healthColor;
+
+  if(dist(bob.getX(), bob.getY(), pack.getX(), pack.getY()) < 20)
   {
-    health = health + 50;
-    pack.setX(10000);
+    health = health + 20;
+    pack.setX(900);
+    pack.setY(900);
+    pack.setDirectionX(5);
   }
 
   //bullet colliding with asteroids
@@ -145,7 +149,7 @@ public void draw()
   
   }
 
-  if(health <= 90)
+  if(health <= 30)
   {
     pack.show();
     pack.move();
@@ -259,6 +263,7 @@ class SpaceShip extends Floater
 
       myPointDirection = 0;
     }
+
 
   public void setX(int x) {myCenterX = x;}    
   public int getX() {return (int)myCenterX;} 
@@ -379,6 +384,7 @@ public class Asteroids extends Floater
 
 public class Health extends Floater
 {
+  private int rotSpeed;
   public Health()
   {
     corners = 4;
@@ -399,15 +405,16 @@ public class Health extends Floater
     myCenterX = (int)(Math.random()*800);
     myCenterY = (int)(Math.random()*800);
 
-    myDirectionX = (Math.random()*3)-1;
-    myDirectionY = (Math.random()*3)-1;
+    myDirectionX = 0.5;
+    myDirectionY = 0.5;
 
     myColor = color(10, 255, 10);
 
+    rotSpeed = 1;
     myPointDirection = (int)(Math.random()*360);
-
-
   }
+
+
   public void setX(int x) {myCenterX = x;}    
   public int getX() {return (int)myCenterX;}   
   public void setY(int y) {myCenterY = y;}    
@@ -418,6 +425,14 @@ public class Health extends Floater
   public double getDirectionY() {return myDirectionY;}
   public void setPointDirection(int degrees) {myPointDirection = degrees;}
   public double getPointDirection() {return myPointDirection;}
+  public void setColor(int x) {myColor = color(x);}
+  public int getColor() {return myColor;}
+
+  public void move()
+  {
+    rotate(rotSpeed);
+    super.move();
+  }
 }
 
 public class Bullet extends Floater
