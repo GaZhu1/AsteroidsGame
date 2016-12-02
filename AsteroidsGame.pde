@@ -147,8 +147,6 @@ public void draw()
   fill(shipColor);
   text("Health: " + health, 705, 30);
   
-  }
-
   if(health <= 30)
   {
     pack.show();
@@ -164,7 +162,11 @@ public void draw()
   if(asteroidBelt.size() == 0)
   {
     win = true;
+  } 
+  
   }
+
+
 
 }
 
