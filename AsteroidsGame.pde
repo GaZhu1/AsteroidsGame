@@ -23,7 +23,7 @@ public void setup()
 
  asteroidBelt = new ArrayList <Asteroids>(); 
 
- for (int i = 0; i < 15; i ++)
+ for (int i = 0; i < 20; i ++)
  {
   asteroidBelt.add(i, new Asteroids());
  }
@@ -39,7 +39,7 @@ public void draw()
   if(gameOver == true && win == false)
   {
     fill(0);
-    rect(0, 0, 1000, 1000);
+    rect(-5, -5, 1000, 1000);
     fill(255);
     textAlign(CENTER);
     textSize(80);
@@ -84,7 +84,7 @@ public void draw()
       asteroidBelt.remove(nI);
     } 
   }
-
+  
   int healthColor;
 
   if(dist(bob.getX(), bob.getY(), pack.getX(), pack.getY()) < 20)
@@ -92,7 +92,8 @@ public void draw()
     health = health + 20;
     pack.setX(900);
     pack.setY(900);
-    pack.setDirectionX(5);
+    pack.setDirectionX(0);
+    pack.setDirectionY(0);
   }
 
   //bullet colliding with asteroids
@@ -166,31 +167,45 @@ public void draw()
   
   }
 
-
-
+if(dIsPressed == true)
+{
+  bob.rotate(10);
+  rocket.rotate(10);  
+}
+if(aIsPressed == true)
+{
+  bob.rotate(-10);
+  rocket.rotate(-10);
+}
+if(wIsPressed == true)
+{
+  rocket.show();    
+  rocket.accelerate(0.1);    
+  bob.accelerate(0.1);  
 }
 
+}
+boolean dIsPressed;
+boolean aIsPressed;
+boolean wIsPressed;
 public void keyPressed()
 {
+
   if(gameOver == false)
   {
     if (key == 'a')
     {
-      bob.rotate(-10);
-      rocket.rotate(-10);
+      aIsPressed = true;
     }
 
     if (key == 'd')
     {
-      bob.rotate(10);
-      rocket.rotate(10);
+      dIsPressed = true;
     }
 
     if(key == 'w')
     {
-      rocket.show();    
-      rocket.accelerate(0.1);    
-      bob.accelerate(0.1);
+      wIsPressed = true;
     }
     
     if(key == 'h')
@@ -222,11 +237,27 @@ public void keyPressed()
       {
         bullets.add(i, new Bullet(bob));
       }
-    }    
+    }
+
+  }
+}
+
+public void keyReleased()
+{
+  if (key == 'd')
+  {
+    dIsPressed = false;
+  } 
+
+  if (key == 'a')
+  {
+    aIsPressed = false;
   }
 
-
-
+  if (key == 'w')
+  {
+    wIsPressed = false;
+  }
 }
 
 class SpaceShip extends Floater  
@@ -404,8 +435,8 @@ public class Health extends Floater
     xCorners[3] = 10;
     yCorners[3] = 10;
 
-    myCenterX = (int)(Math.random()*800);
-    myCenterY = (int)(Math.random()*800);
+    myCenterX = (int)(Math.random()*840)+10;
+    myCenterY = (int)(Math.random()*840)+10;
 
     myDirectionX = 0.5;
     myDirectionY = 0.5;
