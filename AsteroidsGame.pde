@@ -1,11 +1,10 @@
 //your variable declarations here
 SpaceShip bob;
-Star [] spaceStars = new Star[250];
 Rocket rocket;
 ArrayList <Asteroids> asteroidBelt;
 ArrayList <Bullet> bullets;
 int score = 0;
-int health = 100;
+int health = 5000;
 Health pack;
 boolean gameOver = false;
 boolean win = false;
@@ -16,11 +15,6 @@ public void setup()
   bob = new SpaceShip();
   rocket = new Rocket();
   pack = new Health();
-  for (int i = 0; i < spaceStars.length; i ++)
-  {
-    spaceStars[i] = new Star();
-  }
-
  asteroidBelt = new ArrayList <Asteroids>(); 
 
  for (int i = 0; i < 20; i ++)
@@ -60,9 +54,7 @@ public void draw()
   else {
   background(0);
   rocket.move();
-  for (int i = 0; i < spaceStars.length; i ++)
   {
-    spaceStars[i].show();
   }
 
   bob.move();
@@ -80,21 +72,12 @@ public void draw()
   {
     if(dist(bob.getX(), bob.getY(), asteroidBelt.get(nI).getX(), asteroidBelt.get(nI).getY()) < 20)
     {
-      health = health - 10;
+      health = health - 100;
       asteroidBelt.remove(nI);
     } 
   }
   
   int healthColor;
-
-  if(dist(bob.getX(), bob.getY(), pack.getX(), pack.getY()) < 20)
-  {
-    health = health + 20;
-    pack.setX(900);
-    pack.setY(900);
-    pack.setDirectionX(0);
-    pack.setDirectionY(0);
-  }
 
   //bullet colliding with asteroids
   for(int aI = asteroidBelt.size()-1; aI >= 0; aI--)
@@ -133,28 +116,7 @@ public void draw()
   textSize(24);
   int shipColor;
   text("Score: " + score, 10, 30);
-  if(health > 50 )
-  {
-    shipColor = color(50, 255, 50);
-  }
-  else if (health >= 30)
-  {
-    shipColor = color(255, 255, 0);
-  }
-  else
-  {
-    shipColor = color(255, 50, 50);
-  }
-  fill(shipColor);
-  text("Health: " + health, 705, 30);
-  
-  if(health <= 30)
-  {
-    pack.show();
-    pack.move();
-  }
-
-
+ 
   if(health <= 0)
   {
     gameOver = true;
@@ -178,8 +140,7 @@ if(aIsPressed == true)
   rocket.rotate(-10);
 }
 if(wIsPressed == true)
-{
-  rocket.show();    
+{    
   rocket.accelerate(0.1);    
   bob.accelerate(0.1);  
 }
@@ -267,7 +228,7 @@ class SpaceShip extends Floater
       corners = 9;
       xCorners = new int[corners];
       yCorners = new int[corners];
-      xCorners[0]= -6;
+      xCorners[0]= -8;
       yCorners[0] = -10;
       xCorners[1]= -10;
       yCorners[1] = -10;
@@ -292,7 +253,7 @@ class SpaceShip extends Floater
       myDirectionX = 0;
       myDirectionY = 0;
 
-      myColor = color(255);
+      myColor = color(255,0,0);
 
       myPointDirection = 0;
     }
@@ -388,7 +349,7 @@ public class Asteroids extends Floater
     myDirectionX = (Math.random()*3)-1;
     myDirectionY = (Math.random()*3)-1;
 
-    myColor = color(220);
+    myColor = color(0,250,0);
 
     myPointDirection = (int)(Math.random()*360);
 
